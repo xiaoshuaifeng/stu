@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- namespace：对应哪个接口 -->
+<mapper namespace="cn.tedu.mybatis.UserMapper">
+
+	<insert id="insert">
+		INSERT INTO t_user(
+			username,password,age,phone,email
+		) VALUES (
+			#{username},#{password},#{age},#{phone},#{email}
+		)
+	</insert>
+	
+	<delete id="deleteById">
+		DELETE FROM t_user WHERE id=#{id}
+	</delete>
+	
+	<update id="update">
+		UPDATE t_user SET password=#{password}
+	</update>
+	
+	<select id="count" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM t_user;	
+	</select>
+	
+	<select id="findById" resultType="cn.tedu.mybatis.User">
+		SELECT * FROM t_user WHERE id=#{id}	
+	</select>
+	
+	<select id="findAll" resultType="cn.tedu.mybatis.User">
+		SELECT * FROM t_user ORDER BY id	
+	</select>
+	
+	<update id="updateEmailById">
+		UPDATE t_user SET email=#{email} WHERE id=#{id}	
+	</update>
+</mapper>
