@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="cn.tedu.store.mapper.UserMapper">
+	<!-- 在**src/main/resources**下创建**mappers**文件夹，在该文件夹中
+	， 复制粘贴得到**UserMapper.xml**文件，在该文件中配置以上2个抽象方法的映射： -->
+	<resultMap id="UserEntityMap"
+		type="cn.tedu.store.entity.User">
+		<id column="uid" property="uid" />
+		<result column="is_delete" property="isDelete" />
+		<result column="created_user" property="createdUser" />
+		<result column="created_time" property="createdTime" />
+		<result column="modified_user" property="modifiedUser" />
+		<result column="modified_time" property="modifiedTime" />
+	</resultMap>
+
+	<!-- 插入用户数据 -->
+	<!-- Integer insert(User user) -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="uid">
+		INSERT INTO t_user (
+		username, password,
+		salt, phone,
+		email, gender,
+		avatar, is_delete,
+		created_user, created_time,
+		modified_user, modified_time
+		) VALUES (
+		#{username}, #{password},
+		#{salt}, #{phone},
+		#{email}, #{gender},
+		#{avatar}, #{isDelete},
+		#{createdUser}, #{createdTime},
+		#{modifiedUser}, #{modifiedTime}
+		)
+	</insert>
+	
+	<!-- 根据用户名查询用户数据 -->
+		<!-- User findByUsername(String username) -->
+		<select id="findByUsername"
+			resultMap="UserEntityMap">
+			SELECT
+				*
+			FROM
+				t_user
+			WHERE
+				username=#{username}
+		</select>
+		
+</mapper>
